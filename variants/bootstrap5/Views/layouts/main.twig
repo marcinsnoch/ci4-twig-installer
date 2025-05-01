@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+    <head>
+        {% block head %}
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            {{ csrf_meta() }}
+            <title>{% block title %}Page Title{% endblock %} &ndash; {{ config.appName|default('App Name') }}</title>
+            <link rel="shortcut icon" type="image/x-icon" href="{{ base_url('favicon.ico') }}">
+            <link href="{{ base_url('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+            <link href="{{ base_url('plugins/bootstrap-icons/bootstrap-icons.min.css') }}" rel="stylesheet">
+            <link href="{{ base_url('plugins/toastr/toastr.min.css') }}" rel="stylesheet">
+            <link href="{{ base_url('css/style.min.css') }}" rel="stylesheet">
+            {% block styles %}{% endblock %}
+        {% endblock %}
+    </head>
+
+    <body class="d-flex min-vh-100">
+        <aside id="mySidebar" class="custom-sidebar d-flex flex-column offcanvas-lg offcanvas-start border-end">
+            <header class="mb-2 p-2 shadow">
+                <a href="{{ base_url('/') }}" class="d-flex align-items-center justify-content-center link-body-emphasis text-decoration-none fs-3">
+                    <i class="{{ config.appLogo }} me-2"></i> {{ config.appName }}
+                </a>
+            </header>
+            <form action="#" class="p-3" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+            <nav class="flex-grow-1 p-3">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a href="{{ base_url('/') }}" class="nav-link link-body-emphasis{{ url_is('/') ? ' active' }}">
+                            <i class="bi bi-speedometer2"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ base_url('tasks') }}" class="nav-link link-body-emphasis{{ url_is('tasks*') ? ' active' }}">
+                            <i class="bi bi-card-checklist"></i>
+                            Tasks
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ base_url('projects') }}" class="nav-link link-body-emphasis{{ url_is('projects*') ? ' active' }}">
+                            <i class="bi bi-folder"></i>
+                            Projects
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ base_url('warehouse') }}" class="nav-link link-body-emphasis{{ url_is('warehouse*') ? ' active' }}">
+                            <i class="bi bi-boxes"></i>
+                            Warehouse
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ base_url('timesheets') }}" class="nav-link link-body-emphasis{{ url_is('timesheets*') ? ' active' }}">
+                            <i class="bi bi-clock"></i>
+                            Timesheets
+                            <span class="badge rounded-pill text-bg-success float-end">1</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link link-body-emphasis{{ url_is('r*') ? ' active' }}">
+                            <i class="bi bi-archive"></i>
+                            Institutions
+                            <span class="badge rounded-pill text-bg-danger float-end">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link link-body-emphasis{{ url_is('r*') ? ' active' }}">
+                            <i class="bi bi-building"></i>
+                            Organizations
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#settingMenu" class="nav-link link-body-emphasis dropdown" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="settings">
+                            <i class="bi bi-gear"></i> Settings
+                        </a>
+                        <div id="settingMenu" class="collapse">
+                            <ul class="nav flex-column pt-1 ps-2">
+                                <li class="nav-item">
+                                    <a href="{{ base_url('customers') }}" class="nav-link link-body-emphasis">
+                                        <i class="bi bi-circle"></i>
+                                        Customers
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <footer class="p-3">
+                <a href="#" class="btn btn-light d-block">
+                    <i class="bi bi-book me-1"></i> Documentation
+                </a>
+            </footer>
+        </aside>
+        <div class="d-flex flex-column flex-fill">
+            <nav class="navbar navbar-expand-lg shadow mb-3">
+                <div class="container-fluid">
+                    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mySidebar" aria-controls="mySidebar" aria-expanded="false" aria-label="Toggle sidebar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a href="{{ base_url('/') }}" class="navbar-brand d-lg-none fs-6 ms-2">{{ config.appName }}</a>
+                    <ul class="navbar-nav ms-auto flex-row">
+                        <li class="nav-item">
+                            <a class="nav-link p-3 p-lg-2" href="#"><i class="bi bi-bell"></i></a>
+                        </li>
+                        <li class="nav-item me-2">
+                            <a class="nav-link p-3 p-lg-2" href="#"><i class="bi bi-question-circle"></i></a>
+                        </li>
+                    </ul>
+                    <div class="dropdown">
+                        <a href="#" class="d-flex link-body-emphasis text-decoration-none dropdown-toggle align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://avatars.githubusercontent.com/u/0" alt="mdo" width="28" height="28" class="rounded-circle">
+                            <!--<i class="bi bi-person-circle"></i>-->
+                            <span class="d-none d-lg-inline ms-2">Marcin</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a href="{{ base_url('projects/new') }}" class="dropdown-item">
+                                    <i class="bi bi-plus-circle me-1"></i> New project
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ base_url('settings') }}" class="dropdown-item">
+                                    <i class="bi bi-gear me-1"></i> Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ base_url('profile') }}" class="dropdown-item">
+                                    <i class="bi bi-person me-1"></i> Profile
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a href="{{ base_url('logout') }}" class="dropdown-item">
+                                    <i class="bi bi-box-arrow-right me-1"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="flex-grow-1 pt-3 pb-4 px-md-3" style="max-width: 100vw">
+                <div class="container-fluid">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+            <footer class="d-flex justify-content-between align-items-center border-top p-2 p-sm-3">
+                <span>
+                    &copy; Copyrights {{ now|date('Y') }}
+                    <a href="https://github.com/marcinsnoch" class="text-body-secondary text-decoration-none" target="_blank">
+                        <i class="{{ config.appLogo }}"></i> {{ config.appName }}
+                    </a>
+                </span>
+                <div class="d-flex justify-content-end">
+                    <a href="https://github.com/marcinsnoch" class="text-body-secondary me-2" target="_blank">
+                        <i class="bi bi-github"></i>
+                    </a>
+                </div>
+            </footer>
+        </div>
+        <script src="{{ base_url('plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ base_url('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ base_url('plugins/toastr/toastr.min.js') }}"></script>
+        <script src="{{ base_url('js/application.min.js') }}"></script>
+        {% block scripts %}{% endblock %}
+        {% include 'layouts/partials/show_alerts.twig' %}
+    </body>
+
+</html>
+

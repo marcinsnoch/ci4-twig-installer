@@ -1,0 +1,61 @@
+{% extends 'layouts/main.twig' %}
+
+{% set module = {(lang('Product.Products')): 'products'} %}
+{% set page = {(lang('Product.New_product')): ''} %}
+
+{% block title %}{{ page|keys|first }}{% endblock %}
+
+{% block content %}
+    <section class="content-header">
+        {% set breadcrumbs = {}|merge(module, page) %}
+        {% include 'layouts/partials/content-header.twig' %}
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            {# page navbar #}
+            {% set navbar = [
+                {'name': lang('Product.List_of_products'), 'url': 'products', 'icon': 'fa fa-arrow-circle-left'},
+            ] %}
+            {% include 'layouts/partials/content-navbar.twig' %}
+            {# /page navbar #}
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-pen"></i> {{ lang('Product.New_product') }}
+                </div>
+                {{ form_open('products', {'id': 'newProductForm'}) }}
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="productInputName">{{ lang('Product.Name') }}</label>
+                        <input type="text" name="name" id="productInputName" class="form-control{{ validation.name ? ' is-invalid'}}" value="{{ set_value('name') }}" placeholder="{{ lang('Product.Name') }}">
+                        {% if validation.name %}
+                            <span class="error invalid-feedback">{{ validation.name }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="userInputPrice">{{ lang('Product.Price') }}</label>
+                        <input type="number" name="price" id="userInputPrice" class="form-control{{ validation.price ? ' is-invalid'}}" value="{{ set_value('price') }}" placeholder="0.00" min="0.00" max="10000.00" step="0.01">
+                        {% if validation.price %}
+                            <span class="error invalid-feedback">{{ validation.price }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="productInputDescription">{{ lang('Product.Description') }}</label>
+                        <textarea name="description" id="productInputDescription" class="form-control{{ validation.description ? ' is-invalid'}}" placeholder="{{ lang('Product.Description') }}">{{ set_value('description') }}</textarea>
+                        {% if validation.description %}
+                            <span class="error invalid-feedback">{{ validation.description }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" name="save_product" class="btn btn-primary" value="true">
+                        <i class="fa fa-save"></i> {{ lang('Product.Save') }}
+                    </button>
+                    <a href="{{ base_url('/products') }}" class="btn btn-default float-right">
+                        <i class="fa fa-times"></i> {{ lang('Product.Cancel') }}
+                    </a>
+                </div>
+                {{ form_close() }}
+            </div>
+        </div>
+    </section>
+{% endblock %}

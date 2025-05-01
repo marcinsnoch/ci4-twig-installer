@@ -1,0 +1,11 @@
+<nav class="navbar navbar-app navbar-expand-sm navbar-white navbar-light mb-3 elevation-1 rounded p-1">
+    <ul class="navbar-nav">
+        {% for item in navbar %}
+            <li class="nav-item">
+                <a href="{{ base_url(item.url) }}" class="nav-link{{ item.active ? ' active' }} {{ item.css }}">
+                    <i class="{{ item.icon }}"></i> {{ item.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>

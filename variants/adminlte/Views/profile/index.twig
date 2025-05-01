@@ -1,0 +1,91 @@
+{% extends 'layouts/main.twig' %}
+
+{% set module = {(lang('UserProfile.User_profile')): 'user-profile'} %}
+{% set page = {(lang('UserProfile.Edit_profile')): ''} %}
+
+{% block title %}{{ page|keys|first }}{% endblock %}
+
+{% block content %}
+    <section class="content-header">
+        {% set breadcrumbs = {}|merge(module, page) %}
+        {% include 'layouts/partials/content-header.twig' %}
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fa fa-pen"></i> {{ lang('UserProfile.Edit_profile') }}
+                            </h3>
+                        </div>
+                        {{ form_open('user-profile', {'id': 'userProfileForm'}) }}
+                        {{ form_hidden('_method', 'PUT') }}
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="userInputEmail">{{ lang('UserProfile.Email') }}</label>
+                                    <input type="text" name="email" id="userInputEmail" class="form-control{{ validation.email ? ' is-invalid'}}" value="{{ set_value('email', user.email) }}" placeholder="{{ lang('UserProfile.Email') }}" disabled>
+                                    {% if validation.email %}
+                                        <span class="error invalid-feedback">{{ validation.getError('email') }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="userInputFirstName">{{ lang('UserProfile.First_name') }}</label>
+                                            <input type="text" name="first_name" id="userInputFirstName" class="form-control{{ validation.first_name ? ' is-invalid'}}" value="{{ set_value('first_name', user.first_name) }}" placeholder="{{ lang('UserProfile.First_name') }}">
+                                            {% if validation.first_name %}
+                                                <span class="error invalid-feedback">{{ validation.first_name }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="userInputLastName">{{ lang('UserProfile.Last_name') }}</label>
+                                            <input type="text" name="last_name" id="userInputLastName" class="form-control{{ validation.last_name ? ' is-invalid'}}" value="{{ set_value('last_name', user.last_name) }}" placeholder="{{ lang('UserProfile.Last_name') }}">
+                                            {% if validation.last_name %}
+                                                <span class="error invalid-feedback">{{ validation.last_name }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="userInputPassword">{{ lang('UserProfile.Password') }}</label>
+                                            <input type="password" name="password" id="userInputPassword" class="form-control{{ validation.password ? ' is-invalid'}}" placeholder="{{ lang('UserProfile.Password') }}">
+                                            {% if validation.password %}
+                                                <span class="error invalid-feedback">{{ validation.password }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="userInputConfirmPassword">{{ lang('UserProfile.Confirm_password') }}</label>
+                                            <input type="password" name="confirm_password" id="userInputConfirmPassword" class="form-control{{ validation.confirm_password ? ' is-invalid'}}" placeholder="{{ lang('UserProfile.Confirm_password') }}">
+                                            {% if validation.confirm_password %}
+                                                <span class="error invalid-feedback">{{ validation.confirm_password }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" name="update_profile" class="btn btn-primary" value="true">
+                                    <i class="fa fa-save"></i> {{ lang('UserProfile.Save') }}
+                                </button>
+                                <a href="{{ base_url('/') }}" class="btn btn-default float-right">
+                                    <i class="fa fa-times"></i> {{ lang('UserProfile.Cancel') }}
+                                </a>
+                            </div>
+                        {{ form_close() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block scripts %}
+    {{ parent() }}
+{% endblock %}

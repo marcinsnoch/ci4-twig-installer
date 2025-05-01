@@ -1,0 +1,37 @@
+{
+    "name": "webapp-starter",
+    "description": "Web application",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": "MSX",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start": "gulp",
+        "build": "gulp default",
+        "watch": "gulp watchFiles",
+        "install": "npm run plugins && npm run start",
+        "plugins": "node ./resources/npm/Publish.js -v"
+    },
+    "dependencies": {
+        "bootstrap": "^5.3.3",
+        "bootstrap-icons": "^1.11.3",
+        "bootstrap-table": "^1.23.2",
+        "toastr": "^2.1.4"
+    },
+    "devDependencies": {
+        "fs-extra": "^10.0.0",
+        "gulp": "^5.0.0",
+        "gulp-autoprefixer": "^9.0.0",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-imagemin": "^8.0.0",
+        "gulp-livereload": "^4.0.2",
+        "gulp-newer": "^1.4.0",
+        "gulp-plumber": "^1.2.1",
+        "gulp-rename": "^2.0.0",
+        "gulp-sass": "^5.1.0",
+        "gulp-terser": "^1.4.0",
+        "sass": "^1.69.0"
+    }
+}

@@ -1,0 +1,16 @@
+{% set alert = session.getFlashdata('alert') %}
+{% if alert %}
+<script>
+    let alertContent = {
+        closeButton: true,
+        progressBar: true,
+        positionClass: "toast-top-right",
+        timeOut: 10000
+    };
+{% if alert.options %}
+    Object.assign(alertContent, {{ alert.options|raw }});
+{% endif %}
+    toastr.options = alertContent;
+    toastr["{{ alert.type }}"]('{{ alert.msg|raw }}'{% if alert.title %}, '{{ alert.title|raw }}'{% endif %});
+</script>
+{% endif %}

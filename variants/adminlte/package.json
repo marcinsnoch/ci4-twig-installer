@@ -1,0 +1,37 @@
+{
+    "name": "web-app-starter",
+    "description": "Web Application Starter",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": "MSX",
+    "scripts": {
+        "start": "gulp",
+        "build": "gulp default",
+        "watch": "gulp watch",
+        "install": "npm run plugins && npm run start",
+        "plugins": "node ./resources/npm/Publish.js -v"
+    },
+    "devDependencies": {
+        "admin-lte": "^3.2",
+        "bootstrap": "^4.6.2",
+        "bootstrap-table": "^1.23.5",
+        "chart.js": "^4.4.7",
+        "fs-extra": "^10.1.0",
+        "gulp": "^4.0.2",
+        "gulp-autoprefixer": "^8.0.0",
+        "gulp-cli": "^2.3.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-copy": "^4.0.1",
+        "gulp-imagemin": "^7.1.0",
+        "gulp-livereload": "^4.0.2",
+        "gulp-minify": "^3.1.0",
+        "gulp-newer": "^1.4.0",
+        "gulp-plumber": "^1.2.1",
+        "gulp-postcss": "^9.0.1",
+        "gulp-rename": "^2.0.0",
+        "gulp-sass": "^5.1.0",
+        "gulp-sourcemaps": "^3.0.0",
+        "sass": "^1.57.1",
+        "tableexport.jquery.plugin": "^1.30.0"
+    }
+}

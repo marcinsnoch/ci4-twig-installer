@@ -1,0 +1,85 @@
+{% extends 'layouts/main.twig' %}
+
+{% set module = {'Products': 'products'} %}
+{% set page = {'Wszystkie produkty': ''} %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ site_url('plugins/bootstrap-table/bootstrap-table.min.css') }}">
+{% endblock %}
+
+{% block title %}{{ page|keys|first }}{% endblock %}
+
+{% block content %}
+    <section class="content-header">
+        {% set breadcrumbs = {}|merge(module, page) %}
+        {% include 'layouts/partials/content-header.twig' %}
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            {# page navbar #}
+            {% set navbar = [
+                {'name': lang('Product.New_product'), 'url': 'products/new', 'icon': 'fa fa-plus-circle'},
+            ] %}
+            {% include 'layouts/partials/content-navbar.twig' %}
+            {# /page navbar #}
+            <div class="card">
+                <div class="card-body">
+                    <table id="table-data">
+                        <thead>
+                            <tr>
+                                <th data-sortable="true" data-field="name" data-formatter="productNameFormatter">Nazwa</th>
+                                <th data-sortable="true" data-field="qty">Ilość</th>
+                                <th data-sortable="true" data-field="price" data-formatter="productPriceFormatter">Cena jed.</th>
+                                <th data-sortable="true" data-field="price" data-formatter="totalPriceFormatter">Suma</th>
+                                <th data-formatter="productActions" data-width="150">Akcje</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ site_url('plugins/bootstrap-table/bootstrap-table.min.js') }}"></script>
+    <script>
+        function productNameFormatter(value, row) {
+            return row.name + '<br><small>' + row.description + '</small>';
+        }
+        function productPriceFormatter(value, row) {
+            const price = new Intl.NumberFormat("pl-PL", {style: "currency", currency: "PLN"}).format(row.price);
+            return price;
+        }
+        function totalPriceFormatter(value, row) {
+            let total_price = (row.price * row.qty);
+
+            return new Intl.NumberFormat("pl-PL", {style: "currency", currency: "PLN"}).format(total_price);
+        }
+        function productActions(value, row) {
+            return [
+                '<a href="', baseUrl, '/products/', row.id, '" class="btn btn-primary btn-xs" title="Pokaż"><i class="fa fa-folder-open"></i></a> ',
+                '<a href="', baseUrl, '/products/', row.id, '/edit" class="btn btn-secondary btn-xs" title="Edytuj"><i class="fa fa-edit"></i></a> ',
+                '<a href="', baseUrl, '/products/', row.id, '/remove" class="btn btn-danger btn-xs" title="Usuń" onclick="return confirm(\'Na pewno usunąć?\')"><i class="fa fa-trash"></i></a>'
+            ].join('');
+        }
+        $(function () {
+            const $table = $('#table-data');
+            $table.bootstrapTable({
+                classes: 'table table-striped table-hover',
+                pageList: [10, 20, 50, 100, 200],
+                pageSize: 20,
+                pagination: true,
+                search: true,
+                searchAlign: 'left',
+                showColumns: true,
+                showPaginationSwitch: true,
+                showRefresh: true,
+                toggle: 'table',
+                toolbar: '#toolbar',
+                url: '{{ base_url('products/table-data') }}'
+            });
+        });
+    </script>
+{% endblock %}

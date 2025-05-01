@@ -1,0 +1,84 @@
+{% extends "layouts/auth.twig" %}
+
+{% block title %}Zarejestruj się{% endblock %}
+
+{% block content %}
+    <div class="w-100 m-auto">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 offset-3">
+                    <div class="text-center mb-3">
+                        <h1 class="h3">{{ config.appName|default('n/a') }}</h1>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text text-center">{{ lang('Auth.Create_new_account') }}</p>
+                            {{ form_open() }}
+                            <div class="input-group mb-3">
+                                <input type="text" name="first_name" class="form-control{{ validation.hasError('first_name') ? ' is-invalid'}}" value="{{ set_value('first_name') }}" placeholder="{{ lang('Auth.First_name') }}">
+                                <span class="input-group-text">
+                                    <span class="bi bi-person"></span>
+                                </span>
+                                {% if validation.hasError('first_name') %}
+                                    <span class="error invalid-feedback">{{ validation.getError('first_name') }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" name="last_name" class="form-control{{ validation.hasError('last_name') ? ' is-invalid'}}" value="{{ set_value('last_name') }}" placeholder="{{ lang('Auth.Last_name') }}">
+                                <span class="input-group-text">
+                                    <span class="bi bi-alphabet-uppercase"></span>
+                                </span>
+                                {% if validation.hasError('last_name') %}
+                                    <span class="error invalid-feedback">{{ validation.getError('last_name') }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" name="email" class="form-control{{ validation.hasError('email') ? ' is-invalid'}}" value="{{ set_value('email') }}" placeholder="{{ lang('Auth.Email') }}">
+                                <span class="input-group-text">
+                                    <span class="bi bi-envelope"></span>
+                                </span>
+                                {% if validation.hasError('email') %}
+                                    <span class="error invalid-feedback">{{ validation.getError('email') }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="password" name="password" class="form-control{{ validation.hasError('password') ? ' is-invalid'}}" value="{{ set_value('password') }}" placeholder="{{ lang('Auth.Password') }}">
+                                <span class="input-group-text">
+                                    <span class="bi bi-asterisk"></span>
+                                </span>
+                                {% if validation.hasError('password') %}
+                                    <span class="error invalid-feedback">{{ validation.getError('password') }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="password" name="confirm_password" class="form-control{{ validation.hasError('confirm_password') ? ' is-invalid'}}" value="{{ set_value('confirm_password') }}" placeholder="{{ lang('Auth.Confirm_password') }}">
+                                <span class="input-group-text">
+                                    <span class="bi bi-asterisk"></span>
+                                </span>
+                                {% if validation.hasError('confirm_password') %}
+                                    <span class="error invalid-feedback">{{ validation.getError('confirm_password') }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" name="terms" id="agreeTerms" value="1" {{ set_checkbox('terms', '1') }}>
+                                        <label for="agreeTerms">
+                                            {{ lang('Auth.I_agree_to_the_terms', [site_url('terms-and-conditions')]) }}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <button type="submit" name="register" class="btn btn-primary btn-block float-end" value="true">{{ lang('Auth.Register') }}</button>
+                                </div>
+                            </div>
+                            {{ form_close() }}
+                            <p class="mt-3 mb-1">
+                                <a href="{{ base_url('/login') }}">{{ lang('Auth.Back_to_login_page') }}</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}

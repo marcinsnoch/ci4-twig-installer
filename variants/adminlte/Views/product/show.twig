@@ -1,0 +1,38 @@
+{% extends 'layouts/main.twig' %}
+
+{% set module = {(lang('Product.Products')): 'products'} %}
+{% set page = {(lang('Product.New_product')): ''} %}
+
+{% block title %}{{ page|keys|first }}{% endblock %}
+
+{% block content %}
+    <section class="content-header">
+        {% set breadcrumbs = {}|merge(module, page) %}
+        {% include 'layouts/partials/content-header.twig' %}
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            {# page navbar #}
+            {% set navbar = [
+                {'name': lang('Product.List_of_products'), 'url': 'products', 'icon': 'fa fa-arrow-circle-left'},
+            ] %}
+            {% include 'layouts/partials/content-navbar.twig' %}
+            {# /page navbar #}
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-pen"></i> {{ lang('Product.Show_product') }}
+                </div>
+                <div class="card-body">
+                    <h3>{{ product.name }}</h3>
+                    <p>price: {{ product.price }}</p>
+                    <p>description: {{ product.description }}</p></p>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ base_url('/products') }}" class="btn btn-default float-right">
+                        <i class="fa fa-times"></i> {{ lang('Product.Cancel') }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,68 @@
+$success-color: #00cc00;
+
+@use "sass:color";
+
+.navbar-light.bg-light {
+    background-color: white !important;
+    border-radius: .25rem;
+}
+
+.brand-link .brand-image {
+    margin-left: .4rem;
+}
+
+.is-invalid {
+    .btn {
+        border: 1px solid red;
+    }
+}
+
+.btn.active {
+    color: color.scale($success-color, $lightness: 100%);
+    text-shadow: 0 1px 2px color.scale($success-color, $lightness: -20%);
+    background-color: $success-color;
+    border-color: color.scale($success-color, $lightness: -10%);
+}
+.product-number  {
+    font-family: 'Courier New';
+    font-size: 1.2rem;
+}
+.highlight-special {
+    color: #ff6666;
+}
+
+body.dark-mode {
+    .navbar-dark.bg-dark {
+        border-radius: .25rem;
+    }
+    .btn.active {
+        color: color.scale($success-color, $lightness: 100%);
+        text-shadow: 0 1px 2px color.scale($success-color, $lightness: -20%);
+        background-color: $success-color;
+        border-color: color.scale($success-color, $lightness: -10%);
+    }
+    code.product-number  {
+        border: 1px solid #888;
+    }
+}
+
+.icon {
+    img {
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        height: 70px;
+    }
+}
+
+#toast-container {
+    > div {
+        opacity: 0.97;
+    }
+    .toast-info {
+        background-color: #3399ff;
+    }
+    .toast-warning {
+        background-color: #ff9007;
+    }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        {% block head %}
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            {{ csrf_meta() }}
+            <title>{% block title %}Page Title{% endblock %} – {{ config.appName|default('App Name') }}</title>
+            <link rel="shortcut icon" type="image/x-icon" href="{{ base_url('favicon.ico') }}">
+            <link href="{{ base_url('plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+            <link href="{{ base_url('plugins/admin-lte/css/adminlte.min.css') }}" rel="stylesheet">
+            <link href="{{ base_url('plugins/toastr/toastr.min.css') }}" rel="stylesheet">
+            <link href="{{ base_url('css/auth.min.css') }}" rel="stylesheet">
+            {% block styles %}{% endblock %}
+        {% endblock %}
+    </head>
+
+    <body class="login-page">
+        {% block content %}{% endblock %}
+        <script src="{{ base_url('plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ base_url('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ base_url('plugins/toastr/toastr.min.js') }}"></script>
+        <script src="{{ base_url('plugins/admin-lte/js/adminlte.min.js') }}"></script>
+        <script src="{{ base_url('js/application.min.js') }}"></script>
+        {% include 'layouts/partials/show-alerts.twig' %}
+        {% block scripts %}{% endblock %}
+    </body>
+
+</html>

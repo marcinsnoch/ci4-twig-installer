@@ -1,0 +1,68 @@
+<div class="form-inline mt-2">
+    <div class="input-group" data-widget="sidebar-search">
+        <input class="form-control form-control-sidebar" type="search" placeholder="{{ lang('App.Search') }}" aria-label="{{ lang('App.Search') }}">
+        <div class="input-group-append">
+            <button class="btn btn-sidebar">
+                <i class="fas fa-search fa-fw"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<!-- Sidebar Menu -->
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-header">MAIN MENU</li>
+        <li class="nav-item">
+            <a href="{{ site_url('/') }}" class="nav-link{{ url_is('/') ? ' active' }}">
+                <i class="fa fa-home nav-icon"></i>
+                <p>{{ lang('App.Start') }}</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ site_url('/products') }}" class="nav-link{{ url_is('products*') ? ' active' }}">
+                <i class="fa fa-list-ol nav-icon"></i>
+                <p>{{ lang('App.Products') }}</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ site_url('/orders') }}" class="nav-link{{ url_is('orders*') ? ' active' }}">
+                <i class="fa fa-shopping-cart nav-icon"></i>
+                <p>
+                    {{ lang('App.Orders') }}
+                    <span class="right badge badge-danger">7</span>
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ site_url('/user-profile') }}" class="nav-link{{ url_is('user-profile*') ? ' active' }}">
+                <i class="fas fa-user nav-icon"></i>
+                <p>{{ lang('App.User_profile') }}</p>
+            </a>
+        </li>
+        <li class="nav-header">EXAMPLES</li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>
+                    Layout Options
+                    <i class="fas fa-angle-left right"></i>
+                    <span class="badge badge-info right">6</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ site_url('/operations') }}" class="nav-link{{ url_is('operations*') ? ' active' }}">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Operations</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ site_url('/actions') }}" class="nav-link{{ url_is('actions*') ? ' active' }}">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Actions</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>

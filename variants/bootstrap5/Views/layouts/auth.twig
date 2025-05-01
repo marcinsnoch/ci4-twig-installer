@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+    <head>
+        {% block head %}
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            {{ csrf_meta() }}
+            <title>{% block title %}Page Title{% endblock %} &ndash; {{ config.appName|default('App Name') }}</title>
+            <link rel="shortcut icon" type="image/x-icon" href="{{ base_url('favicon.ico') }}">
+            <link href="{{ base_url('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+            <link href="{{ base_url('plugins/bootstrap-icons/bootstrap-icons.min.css') }}" rel="stylesheet">
+            <link href="{{ base_url('plugins/toastr/toastr.min.css') }}" rel="stylesheet">
+            <link href="{{ base_url('css/auth.min.css') }}" rel="stylesheet">
+            {% block styles %}{% endblock %}
+        {% endblock %}
+    </head>
+
+    <body class="d-flex align-items-center py-4 bg-body-tertiary">
+        {% block content %}{% endblock %}
+        <script src="{{ base_url('plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ base_url('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ base_url('plugins/toastr/toastr.min.js') }}"></script>
+        <script src="{{ base_url('js/auth.min.js') }}"></script>
+        {% block scripts %}{% endblock %}
+        {% include 'layouts/partials/show_alerts.twig' %}
+    </body>
+
+</html>
+

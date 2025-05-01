@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+    <head>
+        {% block head %}
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            {{ csrf_meta() }}
+            <title>{% block title %}Page Title{% endblock %} – {{ config.appName|default('App Name') }}</title>
+            <link rel="shortcut icon" type="image/x-icon" href="{{ base_url('favicon.ico') }}">
+            <link href="{{ base_url('plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+            <link href="{{ base_url('plugins/admin-lte/css/adminlte.min.css') }}" rel="stylesheet">
+            <link href="{{ base_url('plugins/toastr/toastr.min.css') }}" rel="stylesheet">
+            <link href="{{ base_url('css/style.min.css') }}" rel="stylesheet">
+            {% block styles %}{% endblock %}
+        {% endblock %}
+    </head>
+
+    <body class="sidebar-mini">
+        <div class="wrapper">
+            <nav class="main-header navbar navbar-expand navbar-dark bg-gray-dark">
+                {% include 'layouts/partials/navbar.twig' %}
+            </nav>
+            <aside class="main-sidebar elevation-4 sidebar-dark-primary">
+                <!-- Brand Logo -->
+                <a href="{{ base_url('/') }}" class="brand-link">
+                    <img src="{{ base_url('img/logo.svg') }}" alt="Logo" class="brand-image">
+                    <span class="brand-text font-weight-light" style="font-size: 1.1rem">{{ config.appName|default('App Name') }}</span>
+                </a>
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    {% include 'layouts/partials/sidebar.twig' %}
+                </div>
+            </aside>
+            <div class="content-wrapper">{% block content %}{% endblock %}</div>
+            <footer class="main-footer">
+                <div class="float-right d-none d-sm-inline">
+                    Created by <a href="mailto:marcin.msx@gmail.com">MSX</a>
+                </div>
+                <strong>Copyright © {{ "now"|date('Y') }} <a href="{{ config.item('app_url') }}">{{ config.appName|default('App Name') }}</a>.</strong> All rights reserved.
+            </footer>
+        </div>
+        <script src="{{ base_url('plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ base_url('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ base_url('plugins/toastr/toastr.min.js') }}"></script>
+        <script src="{{ base_url('plugins/admin-lte/js/adminlte.min.js') }}"></script>
+        <script src="{{ base_url('js/application.min.js') }}"></script>
+        {% include 'layouts/partials/show-alerts.twig' %}
+        {% block scripts %}{% endblock %}
+    </body>
+
+</html>

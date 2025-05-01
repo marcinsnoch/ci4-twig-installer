@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1 class="m-0 text-dark">{{ module|keys|first }}</h1>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="{{ site_url('/') }}">{{ lang('App.Start') }}</a></li>
+                {% for key, val in breadcrumbs %}
+                    {% if loop.last %}
+                        <li class="breadcrumb-item active">{{ key }}</li>
+                    {% else %}
+                        <li class="breadcrumb-item"><a href="{{ site_url(val) }}">{{ key }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+</div>
